@@ -26,10 +26,6 @@ dotenv.config({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-<<<<<<< HEAD
-const contactController = require('./controllers/contact');
-=======
->>>>>>> 1bb858c (initial commit)
 
 /**
  * API keys and Passport configuration.
@@ -52,10 +48,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 // Express configuration.
-<<<<<<< HEAD
-=======
 app.set('port', process.env.PORT || 8080);
->>>>>>> 1bb858c (initial commit)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(compression());
