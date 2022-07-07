@@ -1,0 +1,65 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+<<<<<<< HEAD
+*.swp
+=======
+>>>>>>> 7a80dfe1 (Initial commit)
+
+pids
+logs
+results
+<<<<<<< HEAD
+tmp
+
+# Optional npm cache directory
+.npm
+
+#Build
+scss/main.css
+.nyc_output/*
+
+# API keys and secrets
+.env
+
+# Dependency directory
+node_modules
+bower_components
+
+# Editors
+.idea
+.vscode
+*.iml
+modules.xml
+*.ipr
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+=======
+
+npm-debug.log
+node_modules
+<<<<<<< HEAD
+>>>>>>> 7a80dfe1 (Initial commit)
+=======
+.idea
+>>>>>>> 276673cc (Ignore IDEA)
