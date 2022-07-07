@@ -6,15 +6,11 @@ lib-cov
 *.out
 *.pid
 *.gz
-<<<<<<< HEAD
 *.swp
-=======
->>>>>>> 7a80dfe1 (Initial commit)
 
 pids
 logs
 results
-<<<<<<< HEAD
 tmp
 
 # Optional npm cache directory
@@ -54,12 +50,3 @@ Thumbs.db
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-=======
-
-npm-debug.log
-node_modules
-<<<<<<< HEAD
->>>>>>> 7a80dfe1 (Initial commit)
-=======
-.idea
->>>>>>> 276673cc (Ignore IDEA)
