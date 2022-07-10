@@ -1,45 +1,123 @@
 doctype html
-html.h-100
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='csrf-token', content=_csrf)
-    title #{title} - Hackathon Starter
-    link(rel='shortcut icon', href='/favicon.png')
-    //link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/main.css')
-    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css')
-    block head
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Custom fonts for this template
+  link(rel='stylesheet' href='/vendor/fontawesome-free/css/all.min.css')
+  link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
+  // Custom styles for this template
+  title #{title} - Disks -
+  link(rel='shortcut icon', href='/favicon.png')
+  link(rel='stylesheet', href='/css/bootstrap.min.css')
+  link(rel='stylesheet', href='/css/main.css')
+  link(rel='stylesheet', href='/css/admin.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css')
+  script(src='/vendor/jquery/jquery.min.js')
+  script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+  script(src='/vendor/jquery-easing/jquery.easing.min.js')
+  script(src='/js/sb-admin-2.min.js')
+  script(src='/vendor/chart.js/Chart.min.js')
+  script(src='/js/demo/chart-area-demo.js')
+  script(src='/js/demo/chart-pie-demo.js')
+  block head
 
-  body.d-flex.flex-column.h-100
-    include partials/header
+// Page Wrapper
+#wrapper
 
-    .flex-shrink-0
-      .container.mt-3
-        include partials/flash
+  // Sidebar
+  ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion 
+    // Sidebar - Brand
+    a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='index.html')
+      .sidebar-brand-icon.rotate-n-15
+        i.fas.fa-floppy-disk
+      .sidebar-brand-text.mx-3
+        | Disks 
+        sup v1
+    
+    // Divider
+    hr.sidebar-divider.my-0
+    
+    // Nav Item - Dashboard
+    li.nav-item.active
+      a.nav-link(href='index.html')
+        i.fas.fa-fw.fa-tachometer-alt
+        span Dashboard
+    
+    // Divider
+    hr.sidebar-divider
+    
+    // Data
+    .sidebar-heading
+      | Data
+
+    // Disks
+    li.nav-item
+      a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseDisks' aria-expanded='true' aria-controls='collapseUtilities')
+        i.fas.fa-fw.fa-floppy-disk
+        span Disks
+      #collapseDisks.collapse(aria-labelledby='headingDisks' data-parent='#accordionSidebar')
+        .bg-white.py-2.collapse-inner.rounded
+          h6.collapse-header Disk Utilities
+          a.collapse-item(href='') Colors
+          a.collapse-item(href='') Borders
+          a.collapse-item(href='') Animations
+          a.collapse-item(href='') Other  
+    
+    // Folders
+    li.nav-item
+      a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseFolders' aria-expanded='true' aria-controls='collapseTwo')
+        i.fas.fa-fw.fa-folder
+        span Folders
+      #collapseFolders.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
+        .bg-white.py-2.collapse-inner.rounded
+          h6.collapse-header Folder Components
+          a.collapse-item(href='') Buttons
+          a.collapse-item(href='') Cards
+    
+    // Files
+    li.nav-item
+      a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseFiles' aria-expanded='true' aria-controls='collapseUtilities')
+        i.fas.fa-fw.fa-cog
+        span Files
+      #collapseFiles.collapse(aria-labelledby='headingFiles' data-parent='#accordionSidebar')
+        .bg-white.py-2.collapse-inner.rounded
+          h6.collapse-header File Utilities
+          a.collapse-item(href='') Colors
+          a.collapse-item(href='') Borders
+          a.collapse-item(href='') Animations
+          a.collapse-item(href='') Other
+    
+    // Divider
+    hr.sidebar-divider
+    
+    // Heading
+    .sidebar-heading
+      | Addons
+       
+    // Nav Item - Charts
+    li.nav-item
+      a.nav-link(href='')
+        i.fas.fa-fw.fa-chart-area
+        span Utilites
+    
+    // Nav Item - Tables
+    li.nav-item
+      a.nav-link(href='')
+        i.fas.fa-fw.fa-wrench
+        span Settings
+
+  // Content Wrapper
+  #content-wrapper.d-flex.flex-column
+    #content
+
+      // Topbar
+      nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+        include partials/header
+
+      // Main Content
+      .container-fluid
         block content
-
+        
+    // Footer
     include partials/footer
-
-    script(src='/js/lib/jquery.min.js')
-    script(src='/js/lib/bootstrap.min.js')
-    script(src='/js/main.js')
-    script(src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js')
-
-    script(type="text/javascript").
-      window.cookieconsent.initialise({
-        "palette": {
-          "popup": {
-            "background": "#f8f9fa"
-          },
-          "button": {
-            "background": "#343a40"
-          }
-        },
-        "position": "bottom-right",
-        "content": {
-          "href": "/privacy-policy.html"
-        }
-      });
-

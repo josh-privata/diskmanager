@@ -1,6 +1,4 @@
-/**
- * Module dependencies.
- */
+// Module dependencies.
 const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
@@ -16,30 +14,20 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const sass = require('node-sass-middleware');
 
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
+// Load environment variables from .env file, where API keys and passwords are configured.
 dotenv.config({ path: '.env.example' });
 
-/**
- * Controllers (route handlers).
- */
-const homeController = require('./controllers/home');
-const userController = require('./controllers/user');
+// Controllers (route handlers).
+const homeController = require('./controllers/homecontroller');
+const userController = require('./controllers/usercontroller');
 
-/**
- * API keys and Passport configuration.
- */
+// API keys and Passport configuration.
 const passportConfig = require('./config/passport');
 
-/**
- * Create Express server.
- */
+// Create Express server.
 const app = express();
 
-/**
- * Connect to MongoDB.
- */
+// Connect to MongoDB.
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.error(err);
@@ -63,7 +51,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 1209600000 }, // Two weeks in milliseconds
+  cookie: { maxAge: 1209600000 }, // Two weeks in ms
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }));
 app.use(passport.initialize());
@@ -91,16 +79,27 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/', express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'js/sb-admin-2.min.js'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'vendor/bootstrap/js/bootstrap.bundle.min.js'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'vendor/jquery/jquery.min.js'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'vendor/jquery-easing/jquery.easing.min.js'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'vendor/chart.js/Chart.min.js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/chart.js/dist'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
 
-/**
- * Primary app routes.
- */
+// Primary Routes
 app.get('/', homeController.index);
+
+// Disk Routes
+
+// Folder Routes
+
+// File Routes
+
+// Authentication Routes
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -118,9 +117,7 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
-/**
- * Error Handler.
- */
+// Error Handler.
 if (process.env.NODE_ENV === 'development') {
   // only use in development
   app.use(errorHandler());
@@ -131,9 +128,7 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-/**
- * Start Express server.
- */
+// Start Express server.
 app.listen(app.get('port'), () => {
   console.log(`App is running on http://localhost:${app.get('port')} in ${app.get('env')} mode`);
   console.log('Press CTRL-C to stop');
